@@ -8,12 +8,13 @@
 var a;
 $.get('table', function(data) {
   var list = [];
-  list.push(['Time', 'Close']);
   var raw = data.split('\n');
   for (var i = 0; i < raw.length - 1; ++i) {
     var tmp = raw[i].split(',');
     list.push([tmp[0], parseFloat(tmp[4])]);
   }
+  list.push(['Time', 'Close']);
+  list.reverse();
   a = list;
 });
 
@@ -33,9 +34,8 @@ function drawChart() {
 
   // Set chart options
   var options = {
-    'title':'How Much Pizza I Ate Last Night',
-    'width':400,
-    'height':300
+    'title':'How Much Shit I Ate Last Night',
+    height: 500
   };
 
   // Instantiate and draw our chart, passing in some options.
