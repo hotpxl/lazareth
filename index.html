@@ -5,8 +5,16 @@
 <script type="text/javascript" src="jquery-2.1.0.min.js"></script>
 <script type="text/javascript">
 
+var a;
 $.get('table', function(data) {
-  alert('Loaded');
+  var list = [];
+  list.push(['Time', 'Close']);
+  var raw = data.split('\n');
+  for (var i = 0; i < raw.length - 1; ++i) {
+    var tmp = raw[i].split(',');
+    list.push([tmp[0], parseFloat(tmp[4])]);
+  }
+  a = list;
 });
 
 // Load the Visualization API and the piechart package.
@@ -21,24 +29,17 @@ google.setOnLoadCallback(drawChart);
 function drawChart() {
 
   // Create the data table.
-  var data = new google.visualization.DataTable();
-  data.addColumn('string', 'Topping');
-  data.addColumn('number', 'Slices');
-  data.addRows([
-      ['Mushrooms', 3],
-      ['Onions', 1],
-      ['Olives', 1],
-      ['Zucchini', 1],
-      ['Pepperoni', 2]
-      ]);
+  var data = google.visualization.arrayToDataTable(a);
 
   // Set chart options
-  var options = {'title':'How Much Pizza I Ate Last Night',
+  var options = {
+    'title':'How Much Pizza I Ate Last Night',
     'width':400,
-    'height':300};
+    'height':300
+  };
 
   // Instantiate and draw our chart, passing in some options.
-  var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+  var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
   chart.draw(data, options);
 }
 </script>
