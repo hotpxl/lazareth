@@ -1,0 +1,22 @@
+{
+  "name": "lazareth",
+  "version": "0.0.1",
+  "description": "lazareth",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kevinleeone/lazareth.git"
+  },
+  "author": "Kevin Lee",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kevinleeone/lazareth/issues"
+  },
+  "homepage": "https://github.com/kevinleeone/lazareth",
+  "dependencies": {
+    "express": "*"
+  }
+}
