@@ -1,9 +1,10 @@
 {
   "name": "lazareth",
   "version": "0.0.1",
-  "description": "lazareth",
+  "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "node_modules/supervisor/lib/cli-wrapper.js -x node_modules/coffee-script/bin/coffee app.coffee",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,6 +18,9 @@
   },
   "homepage": "https://github.com/kevinleeone/lazareth",
   "dependencies": {
-    "express": "*"
+    "express": "*",
+    "coffee-script": "*",
+    "supervisor": "*",
+    "jade": "*"
   }
 }
