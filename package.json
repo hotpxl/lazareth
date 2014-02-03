@@ -21,6 +21,8 @@
     "express": "*",
     "coffee-script": "*",
     "supervisor": "*",
-    "jade": "*"
+    "jade": "*",
+    "ejs": "*",
+    "bower": "*"
   }
 }

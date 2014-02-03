@@ -2,11 +2,11 @@
 <head>
 <!--Load the AJAX API-->
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript" src="jquery-2.1.0.min.js"></script>
+<script type="text/javascript" src="/static/bower_components/jquery/jquery.min.js"></script>
 <script type="text/javascript">
 
 var a;
-$.get('table', function(data) {
+$.get('/static/table', function(data) {
   var list = [];
   var raw = data.split('\n');
   for (var i = 0; i < raw.length - 1; ++i) {
