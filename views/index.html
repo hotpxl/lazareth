@@ -6,16 +6,8 @@
 <script type="text/javascript">
 
 var a;
-$.get('/static/table', function(data) {
-  var list = [];
-  var raw = data.split('\n');
-  for (var i = 0; i < raw.length - 1; ++i) {
-    var tmp = raw[i].split(',');
-    list.push([tmp[0], parseFloat(tmp[4])]);
-  }
-  list.push(['Time', 'Close']);
-  list.reverse();
-  a = list;
+$.getJSON('/api/data', function(data) {
+  a = data.data;
 });
 
 // Load the Visualization API and the piechart package.
