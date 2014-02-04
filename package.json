@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git://github.com/kevinleeone/lazareth.git"
   },
-  "author": "Kevin Lee",
+  "author": "Yutian Li",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/kevinleeone/lazareth/issues"
@@ -22,6 +22,7 @@
     "supervisor": "*",
     "jade": "*",
     "ejs": "*",
-    "bower": "*"
+    "bower": "*",
+    "moment": "*"
   }
 }
