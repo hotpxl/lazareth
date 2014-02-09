@@ -1,28 +1,75 @@
 {
-  "name": "lazareth",
-  "version": "0.0.1",
-  "main": "app.coffee",
-  "scripts": {
-    "start": "node_modules/supervisor/lib/cli-wrapper.js -x ./coffee app.coffee",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name":"lazareth",
+  "version":"0.0.1",
+  "description":"",
+  "keywords":[
+
+  ],
+  "homepage":"https://github.com/kevinleeone/lazareth",
+  "bugs":{
+    "url":"https://github.com/kevinleeone/lazareth/issues"
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/kevinleeone/lazareth.git"
+  "license":"MIT",
+  "author":{
+    "name":"Yutian Li",
+    "email":"kevinleeone@gmail.com"
   },
-  "author": "Yutian Li",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/kevinleeone/lazareth/issues"
+  "contributors":[
+
+  ],
+  "files":[
+
+  ],
+  "main":"app",
+  "bin":{
+
   },
-  "homepage": "https://github.com/kevinleeone/lazareth",
-  "dependencies": {
-    "express": "*",
-    "coffee-script": "*",
-    "supervisor": "*",
-    "jade": "*",
-    "ejs": "*",
-    "bower": "*",
-    "moment": "*"
-  }
+  "man":[
+
+  ],
+  "directories":{
+
+  },
+  "repository":{
+    "type":"git",
+    "url":"git://github.com/kevinleeone/lazareth.git"
+  },
+  "scripts":{
+    "start":"node_modules/supervisor/lib/cli-wrapper.js -x ./coffee app.coffee",
+    "test":"echo \"Error: no test specified\" && exit 1"
+  },
+  "config":{
+
+  },
+  "dependencies":{
+    "express":"*",
+    "coffee-script":"*",
+    "supervisor":"*",
+    "jade":"*",
+    "ejs":"*",
+    "bower":"*",
+    "moment":"*"
+  },
+  "devDependencies":{
+
+  },
+  "bundledDependencies":[
+
+  ],
+  "optionalDependencies":{
+
+  },
+  "engines":{
+    "node":"*",
+    "npm":"*"
+  },
+  "os":[
+    "darwin",
+    "linux"
+  ],
+  "cpu":[
+    "x64",
+    "ia32"
+  ],
+  "private":true
 }
