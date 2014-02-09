@@ -48,7 +48,10 @@
     "jade":"*",
     "ejs":"*",
     "bower":"*",
-    "moment":"*"
+    "moment":"*",
+    "grunt":"*",
+    "grunt-cli":"*",
+    "grunt-coffeelint":"*"
   },
   "devDependencies":{
 
