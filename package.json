@@ -35,8 +35,8 @@
     "url":"git://github.com/kevinleeone/lazareth.git"
   },
   "scripts":{
-    "start":"node_modules/supervisor/lib/cli-wrapper.js -x ./coffee app.coffee",
-    "test":"./grunt test"
+    "start":"supervisor -x coffee app.coffee",
+    "test":"grunt test"
   },
   "config":{
 
