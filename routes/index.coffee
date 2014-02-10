@@ -14,7 +14,7 @@ exports.api = (req, res) ->
       throw err
     raw = JSON.parse data
     predict raw
-    list = (raw[i] for i in [0..raw.length - 1] by raw.length // 300)
+    list = (raw[i] for i in [0..raw.length - 1] by Math.floor(raw.length, 300))
     list.reverse()
     list.push ['Time', 'Close']
     list.reverse()

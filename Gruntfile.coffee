@@ -11,6 +11,15 @@ module.exports = (grunt) ->
           level: 'warn'
         no_empty_param_list:
           level: 'warn'
+    mochaTest:
+      test:
+        options:
+          reporter: 'nyan'
+          require: 'coffee-script'
+        src: ['test/**/*.coffee']
+
   grunt.loadNpmTasks 'grunt-coffeelint'
-  grunt.registerTask 'default', ['coffeelint']
+  grunt.loadNpmTasks 'grunt-mocha-test'
+
+  grunt.registerTask 'test', ['coffeelint', 'mochaTest']
 
