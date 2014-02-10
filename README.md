@@ -1,5 +1,7 @@
 # lazareth
 
-[![Build Status](https://travis-ci.org/kevinleeone/lazareth.png?branch=master)](https://travis-ci.org/kevinleeone/lazareth)
+[![Build Status](https://api.travis-ci.org/kevinleeone/lazareth.png?branch=master)](https://travis-ci.org/kevinleeone/lazareth)
+
+### Introduction
 
 An online financial strategy website.

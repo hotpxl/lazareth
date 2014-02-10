@@ -48,14 +48,14 @@
     "jade":"*",
     "ejs":"*",
     "bower":"*",
-    "moment":"*",
+    "moment":"*"
+  },
+  "devDependencies":{
     "grunt":"*",
     "grunt-cli":"*",
     "grunt-coffeelint":"*",
-    "grunt-mocha-test":"*"
-  },
-  "devDependencies":{
-
+    "grunt-mocha-test":"*",
+    "should":"*"
   },
   "bundledDependencies":[
 
