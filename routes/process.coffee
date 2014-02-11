@@ -43,16 +43,20 @@ class Transaction
         if i == data.length - 1 # Force cover at the end of day
           now.trade = -last.position
         else
-          now.extreme = if 0 < (now.price - last.extreme) * last.position then now.price else last.extreme
+          now.extreme = if 0 < (now.price - last.extreme) * last.position
+          then now.price else last.extreme
           now.af = do ->
             t = last.af + (now.extreme isnt last.extreme) * @stepSize
             if t < @maxAF then t else @maxAF
           now.sar = last.sar + (now.extreme - last.sar) * now.af
-          now.trade = if 0 < (now.sar - now.price) * last.position then -last.position else 0
+          now.trade = if 0 < (now.sar - now.price) * last.position
+          then -last.position else 0
         if now.trade # Trade
           now.position = last.position + now.trade
           assert.equal now.position, 0 # TODO assert
-          now.return = (1 + last.return) * (1 - now.trade * (now.openPrice / now.price - 1)) - 1
+          now.return =
+          (1 + last.return) *
+          (1 - now.trade * (now.openPrice / now.price - 1)) - 1
           now.openPrice = 0
       else if i and @cutoff < i # Consider opening a position
         if last.max <= now.price
@@ -91,7 +95,8 @@ predict = (data) ->
   transaction = new Transaction 2, 15, 0.02, 0.1, 0.01
   return
 
-fs.readFile path.join(__dirname, '../data/CU.intraday.csv.fmt'), 'ascii', (err, data) ->
+fs.readFile path.join(__dirname, '../data/CU.intraday.csv.fmt'), 'ascii',
+(err, data) ->
   if err
     throw err
   raw = JSON.parse(data)[-300..]
