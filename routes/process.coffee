@@ -2,6 +2,7 @@ fs = require 'fs'
 path = require 'path'
 moment = require 'moment'
 assert = require 'assert'
+_ = require 'underscore'
 
 class Transaction
 
@@ -32,13 +33,13 @@ class Transaction
         price: parseInt data[i][1]
         openPrice: last.openPrice
         return: last.return
-        max: 0
-        min: 0
+        max: last.max
+        min: last.min
       if @rollback < i # Set rollback maximum and minimum
-        do ->
-          t = parseInt data[i - @rollback][i]
-          now.max = if last.max < t then t else last.max
-          now.min = if t < last.min then t else last.min
+        do =>
+          t = parseInt data[i - @rollback][1]
+          now.max = if last.max < t then t
+          now.min = if t < last.min then t
       if last.position # SAR
         if i == data.length - 1 # Force cover at the end of day
           now.trade = -last.position
@@ -68,6 +69,9 @@ class Transaction
           now.extreme = now.price
           now.sar = now.price
           now.openPrice = if now.trade then now.price
+      last = now
+    console.log last.return
+
 
 # updateOnce: (data) ->
 #   if data.length <= @time
@@ -92,7 +96,11 @@ class Transaction
 #         if data[@time - 1] < @sar # Stop and reverse
 #           trade = -1
 predict = (data) ->
-  transaction = new Transaction 2, 15, 0.02, 0.1, 0.01
+  a = _.groupBy data, (i) ->
+    i[0][..9]
+  transaction = new Transaction 2, 15, 0.1, 0.01
+  for i, j of a
+    transaction.processDay j
   return
 
 fs.readFile path.join(__dirname, '../data/CU.intraday.csv.fmt'), 'ascii',

@@ -48,7 +48,8 @@
     "jade":"*",
     "ejs":"*",
     "bower":"*",
-    "moment":"*"
+    "moment":"*",
+    "underscore":"*"
   },
   "devDependencies":{
     "grunt":"*",
@@ -77,3 +78,4 @@
   ],
   "private":true
 }
+
