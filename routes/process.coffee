@@ -10,7 +10,7 @@ class Transaction
     if @cutoff < @rollback
       throw new Error 'Rollback larger than cutoff'
 
-  processDay: (data) ->
+  processDay: (data, ret) ->
     last =
       trade: 0
       position: 0
@@ -19,9 +19,9 @@ class Transaction
       sar: 0
       price: 0
       openPrice: 0
-      return: 0
-      max: parseInt data[0][1]
-      min: parseInt data[0][1]
+      return: ret
+      max: parseFloat data[0][1]
+      min: parseFloat data[0][1]
     # Data here should be of one day
     for i in [0..data.length - 1]
       now =
@@ -30,14 +30,14 @@ class Transaction
         extreme: 0
         af: 0
         sar: last.sar
-        price: parseInt data[i][1]
+        price: parseFloat data[i][1]
         openPrice: last.openPrice
         return: last.return
         max: last.max
         min: last.min
       if @rollback < i # Set rollback maximum and minimum
         do =>
-          t = parseInt data[i - @rollback][1]
+          t = parseFloat data[i - @rollback][1]
           now.max = if last.max < t then t else last.max
           now.min = if t < last.min then t else last.min
       if last.position # SAR
@@ -71,6 +71,7 @@ class Transaction
           now.openPrice = if now.trade then now.price else 0
       last = now
     console.log last.return
+    return last.return
 
 
 # updateOnce: (data) ->
@@ -82,7 +83,7 @@ class Transaction
 #       trade = -@position
 #     else # Use SAR technique
 #       if @position == 1
-#         lastPrice = parseInt(data[@time - 1])
+#         lastPrice = parseFloat(data[@time - 1])
 #         if @lastTrade
 #           @sar = lastPrice * 0.9 # Should be high and low
 #           @extreme = lastPrice * 1.1
@@ -99,14 +100,15 @@ predict = (data) ->
   a = _.groupBy data, (i) ->
     i[0][..9]
   transaction = new Transaction 2, 15, 0.1, 0.01
+  ret = 0
   for i, j of a
-    transaction.processDay j
+    ret = transaction.processDay j, ret
   return
 
-fs.readFile path.join(__dirname, '../data/CU.intraday.csv.fmt'), 'ascii',
+fs.readFile path.join(__dirname, '../data/stock.csv.fmt'), 'ascii',
 (err, data) ->
   if err
     throw err
-  raw = JSON.parse(data)[-1000..]
+  raw = JSON.parse(data)
   predict raw
   return
