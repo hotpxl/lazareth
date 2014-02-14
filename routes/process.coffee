@@ -38,15 +38,15 @@ class Transaction
       if @rollback < i # Set rollback maximum and minimum
         do =>
           t = parseInt data[i - @rollback][1]
-          now.max = if last.max < t then t
-          now.min = if t < last.min then t
+          now.max = if last.max < t then t else last.max
+          now.min = if t < last.min then t else last.min
       if last.position # SAR
         if i == data.length - 1 # Force cover at the end of day
           now.trade = -last.position
         else
           now.extreme = if 0 < (now.price - last.extreme) * last.position
           then now.price else last.extreme
-          now.af = do ->
+          now.af = do =>
             t = last.af + (now.extreme isnt last.extreme) * @stepSize
             if t < @maxAF then t else @maxAF
           now.sar = last.sar + (now.extreme - last.sar) * now.af
@@ -59,7 +59,7 @@ class Transaction
           (1 + last.return) *
           (1 - now.trade * (now.openPrice / now.price - 1)) - 1
           now.openPrice = 0
-      else if i and @cutoff < i # Consider opening a position
+      else if @cutoff < i # Consider opening a position
         if last.max <= now.price
           now.trade = 1
         else if now.price <= last.min
@@ -68,7 +68,7 @@ class Transaction
           now.position = now.trade
           now.extreme = now.price
           now.sar = now.price
-          now.openPrice = if now.trade then now.price
+          now.openPrice = if now.trade then now.price else 0
       last = now
     console.log last.return
 
@@ -107,6 +107,6 @@ fs.readFile path.join(__dirname, '../data/CU.intraday.csv.fmt'), 'ascii',
 (err, data) ->
   if err
     throw err
-  raw = JSON.parse(data)[-300..]
+  raw = JSON.parse(data)[-1000..]
   predict raw
   return
