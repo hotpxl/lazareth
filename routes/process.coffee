@@ -105,7 +105,7 @@ predict = (data) ->
     ret = transaction.processDay j, ret
   return
 
-fs.readFile path.join(__dirname, '../data/stock.csv.fmt'), 'ascii',
+fs.readFile path.join(__dirname, '../data/stock.fmt'), 'ascii',
 (err, data) ->
   if err
     throw err
