@@ -57,7 +57,7 @@ class Transaction
           assert.equal now.position, 0 # TODO assert
           now.return =
           (1 + last.return) *
-          (1 - now.trade * (now.openPrice / now.price - 1)) - 1
+          (1 - now.trade * (now.price / now.openPrice - 1)) - 1
           now.openPrice = 0
       else if @cutoff < i # Consider opening a position
         if last.max <= now.price
@@ -99,7 +99,7 @@ class Transaction
 predict = (data) ->
   a = _.groupBy data, (i) ->
     i[0][..9]
-  transaction = new Transaction 2, 15, 0.1, 0.01
+  transaction = new Transaction 4, 8, 0.1, 0.01
   ret = 0
   for i, j of a
     ret = transaction.processDay j, ret
