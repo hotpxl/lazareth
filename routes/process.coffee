@@ -20,8 +20,8 @@ class Transaction
       price: 0
       openPrice: 0
       return: ret
-      max: parseFloat data[0][1]
-      min: parseFloat data[0][1]
+      max: parseFloat data[0][2]
+      min: parseFloat data[0][3]
     # Data here should be of one day
     for i in [0..data.length - 1]
       now =
@@ -37,27 +37,40 @@ class Transaction
         min: last.min
       if @rollback < i # Set rollback maximum and minimum
         do =>
-          t = parseFloat data[i - @rollback][1]
-          now.max = if last.max < t then t else last.max
-          now.min = if t < last.min then t else last.min
+          max = parseFloat data[i - @rollback][2]
+          min = parseFloat data[i - @rollback][3]
+          now.max = if last.max < max then max else last.max
+          now.min = if min < last.min then min else last.min
       if last.position # SAR
         if i == data.length - 1 # Force cover at the end of day
           now.trade = -last.position
         else
-          now.extreme = if 0 < (now.price - last.extreme) * last.position
-          then now.price else last.extreme
-          now.af = do =>
-            t = last.af + (now.extreme isnt last.extreme) * @stepSize
-            if t < @maxAF then t else @maxAF
-          now.sar = last.sar + (now.extreme - last.sar) * now.af
-          now.trade = if 0 < (now.sar - now.price) * last.position
-          then -last.position else 0
+          if last.position == 1
+            now.extreme = do =>
+              high = parseFloat data[i][2]
+              if last.extreme < high then high else last.extreme
+            now.af = do =>
+              t = last.af + (last.extreme < now.extreme) * @stepSize
+              if t < @maxAF then t else @maxAF
+            now.sar = last.sar + (last.extreme - last.sar) * last.af
+            now.trade = do =>
+              if parseFloat(data[i][3]) < now.sar then -1 else 0
+          else
+            now.extreme = do =>
+              low = parseFloat data[i][3]
+              if low < last.extreme then low else last.extreme
+            now.af = do =>
+              t = last.af + (now.extreme < last.extreme) * @stepSize
+              if t < @maxAF then t else @maxAF
+            now.sar = last.sar + (last.extreme - last.sar) * last.af
+            now.trade = do =>
+              if now.sar < parseFloat(data[i][2]) then 1 else 0
         if now.trade # Trade
           now.position = last.position + now.trade
           assert.equal now.position, 0 # TODO assert
           now.return =
           (1 + last.return) *
-          (1 - now.trade * (now.openPrice / now.price - 1)) - 1
+          (1 - now.trade * (now.price / now.openPrice - 1)) - 1
           now.openPrice = 0
       else if @cutoff < i # Consider opening a position
         if last.max <= now.price
@@ -66,46 +79,31 @@ class Transaction
           now.trade = -1
         if now.trade # Open a position
           now.position = now.trade
-          now.extreme = now.price
-          now.sar = now.price
+          now.extreme = do =>
+            if now.trade == 1
+              parseFloat data[i][2]
+            else
+              parseFloat data[i][3]
+          now.sar = do =>
+            if now.trade == 1
+              parseFloat data[i][3]
+            else
+              parseFloat data[i][2]
           now.openPrice = if now.trade then now.price else 0
       last = now
-    console.log last.return
     return last.return
 
-
-# updateOnce: (data) ->
-#   if data.length <= @time
-#     throw new Error 'Time overflow'
-#   trade = 0
-#   if @time && @position # Check position
-#     if moment(data[@time][0]).dayOfYear() != moment(data[@time - 1][0]).dayOfYear() || @time == data.length - 1 # Force cover at the end of the day
-#       trade = -@position
-#     else # Use SAR technique
-#       if @position == 1
-#         lastPrice = parseFloat(data[@time - 1])
-#         if @lastTrade
-#           @sar = lastPrice * 0.9 # Should be high and low
-#           @extreme = lastPrice * 1.1
-#           @af = 0
-#         else
-#           @af = @af + (@extreme < lastPrice) * @stepSize
-#           if @maxAF < @af
-#             @af = @maxAF
-#           @extreme = if @extreme < lastPrice * 1.1 then lastPrice * 1.1 else @extreme
-#           @sar = @sar + (@extreme - @sar) * @af
-#         if data[@time - 1] < @sar # Stop and reverse
-#           trade = -1
 predict = (data) ->
-  a = _.groupBy data, (i) ->
+  day = _.groupBy data, (i) ->
     i[0][..9]
   transaction = new Transaction 2, 15, 0.1, 0.01
   ret = 0
-  for i, j of a
+  for i, j of day
     ret = transaction.processDay j, ret
+    console.log ret
   return
 
-fs.readFile path.join(__dirname, '../data/stock.csv.fmt'), 'ascii',
+fs.readFile path.join(__dirname, '../data/stock.fmt'), 'ascii',
 (err, data) ->
   if err
     throw err

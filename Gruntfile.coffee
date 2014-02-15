@@ -2,7 +2,12 @@ module.exports = (grunt) ->
   grunt.initConfig
     coffeelint:
       test:
-        src: ['*.coffee', 'routes/**/*.coffee', 'test/**/*.coffee']
+        src: [
+          '*.coffee',
+          'routes/**/*.coffee',
+          'test/**/*.coffee',
+          'data/**/*.coffee'
+        ]
         options:
           arrow_spacing:
             level: 'warn'
