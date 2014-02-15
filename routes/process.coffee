@@ -96,7 +96,7 @@ class Transaction
 predict = (data) ->
   day = _.groupBy data, (i) ->
     i[0][..9]
-  transaction = new Transaction 2, 15, 0.1, 0.01
+  transaction = new Transaction 4, 8, 0.1, 0.01
   ret = 0
   for i, j of day
     ret = transaction.processDay j, ret
