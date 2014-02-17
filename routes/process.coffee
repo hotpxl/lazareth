@@ -11,6 +11,7 @@ class Transaction
       throw new Error 'Rollback larger than cutoff'
 
   processDay: (data, ret) ->
+    retList = []
     last =
       trade: 0
       position: 0
@@ -70,39 +71,19 @@ class Transaction
           now.sar = now.price
           now.openPrice = if now.trade then now.price else 0
       last = now
-    console.log last.return
-    return last.return
+      retList.push last.return
+    return retList
 
-
-# updateOnce: (data) ->
-#   if data.length <= @time
-#     throw new Error 'Time overflow'
-#   trade = 0
-#   if @time && @position # Check position
-#     if moment(data[@time][0]).dayOfYear() != moment(data[@time - 1][0]).dayOfYear() || @time == data.length - 1 # Force cover at the end of the day
-#       trade = -@position
-#     else # Use SAR technique
-#       if @position == 1
-#         lastPrice = parseFloat(data[@time - 1])
-#         if @lastTrade
-#           @sar = lastPrice * 0.9 # Should be high and low
-#           @extreme = lastPrice * 1.1
-#           @af = 0
-#         else
-#           @af = @af + (@extreme < lastPrice) * @stepSize
-#           if @maxAF < @af
-#             @af = @maxAF
-#           @extreme = if @extreme < lastPrice * 1.1 then lastPrice * 1.1 else @extreme
-#           @sar = @sar + (@extreme - @sar) * @af
-#         if data[@time - 1] < @sar # Stop and reverse
-#           trade = -1
 predict = (data) ->
   a = _.groupBy data, (i) ->
     i[0][..9]
   transaction = new Transaction 4, 8, 0.1, 0.01
-  ret = 0
+  currentReturn = 0
+  retList = []
   for i, j of a
-    ret = transaction.processDay j, ret
+    retList = retList.concat transaction.processDay(j, currentReturn)
+    currentReturn = retList[retList.length - 1]
+  console.log retList
   return
 
 fs.readFile path.join(__dirname, '../data/stock.fmt'), 'ascii',
