@@ -1,3 +1,6 @@
+require 'coffee-script/register'
+process = require './process.coffee'
+
 predict = (data) ->
   time = (i[0] for i in data)
   return
@@ -22,3 +25,4 @@ exports.api = (req, res) ->
     res.json {'query': req.params.name, 'data': list}
   return
 
+process.whatever()

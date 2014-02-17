@@ -83,13 +83,9 @@ predict = (data) ->
   for i, j of a
     retList = retList.concat transaction.processDay(j, currentReturn)
     currentReturn = retList[retList.length - 1]
-  console.log retList
-  return
+  return retList
 
-fs.readFile path.join(__dirname, '../data/stock.fmt'), 'ascii',
-(err, data) ->
-  if err
-    throw err
-  raw = JSON.parse(data)
-  predict raw
-  return
+exports.whatever = ->
+  data = fs.readFileSync path.join(__dirname, '../data/stock.fmt'), 'ascii'
+  raw = JSON.parse data
+  return predict raw

@@ -22,7 +22,7 @@ module.exports = (grunt) ->
         src: ['test/**/*.coffee']
         options:
           reporter: 'spec'
-          require: 'coffee-script'
+          require: 'coffee-script/register'
 
   grunt.loadNpmTasks 'grunt-coffeelint'
   grunt.loadNpmTasks 'grunt-mocha-test'
