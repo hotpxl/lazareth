@@ -9,7 +9,8 @@ exports.index = (req, res) ->
 exports.api = (req, res) ->
   fs = require 'fs'
   path = require 'path'
-  fs.readFile path.join(__dirname, '../data/CU.intraday.csv.fmt'), 'ascii', (err, data) ->
+  fs.readFile path.join(__dirname, '../data/CU.intraday.csv.fmt'), 'ascii',
+  (err, data) ->
     if err
       throw err
     raw = JSON.parse data

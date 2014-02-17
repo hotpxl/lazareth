@@ -57,7 +57,7 @@ class Transaction
           assert.equal now.position, 0 # TODO assert
           now.return =
           (1 + last.return) *
-          (1 - now.trade * (now.openPrice / now.price - 1)) - 1
+          (1 - now.trade * (now.price / now.openPrice - 1)) - 1
           now.openPrice = 0
       else if @cutoff < i # Consider opening a position
         if last.max <= now.price
@@ -105,7 +105,7 @@ predict = (data) ->
     ret = transaction.processDay j, ret
   return
 
-fs.readFile path.join(__dirname, '../data/stock.csv.fmt'), 'ascii',
+fs.readFile path.join(__dirname, '../data/stock.fmt'), 'ascii',
 (err, data) ->
   if err
     throw err

@@ -10,9 +10,9 @@ checkOrdered = (list) ->
   return true
 
 describe 'Orginial data', ->
-  describe 'time in CU.intraday.csv.fmt', ->
+  describe 'time in cu-intraday.fmt', ->
     it 'should be sorted', (done) ->
-      fs.readFile path.join(__dirname, '../data/CU.intraday.csv.fmt'),'ascii',
+      fs.readFile path.join(__dirname, '../data/cu-intraday.fmt'),'ascii',
       (err, data) ->
         if err
           throw err
@@ -21,9 +21,9 @@ describe 'Orginial data', ->
         checkOrdered(time).should.be.exactly true
         done()
         return
-  describe 'time in stock.csv.fmt', ->
+  describe 'time in stock.fmt', ->
     it 'should be sorted', (done) ->
-      fs.readFile path.join(__dirname, '../data/stock.csv.fmt'),'ascii',
+      fs.readFile path.join(__dirname, '../data/stock.fmt'),'ascii',
       (err, data) ->
         if err
           throw err
