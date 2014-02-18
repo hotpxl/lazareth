@@ -1,7 +1,6 @@
 fs = require 'fs'
 path = require 'path'
 moment = require 'moment'
-assert = require 'assert'
 _ = require 'underscore'
 
 class Transaction
@@ -55,7 +54,6 @@ class Transaction
           then -last.position else 0
         if now.trade # Trade
           now.position = last.position + now.trade
-          assert.equal now.position, 0 # TODO assert
           now.return =
           (1 + last.return) *
           (1 - now.trade * (now.price / now.openPrice - 1)) - 1

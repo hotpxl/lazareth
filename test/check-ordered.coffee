@@ -1,7 +1,7 @@
 fs = require 'fs'
 path = require 'path'
 moment = require 'moment'
-should = require 'should'
+should = require('chai').should()
 
 checkOrdered = (list) ->
   for i in [0..list.length - 1]
@@ -18,7 +18,7 @@ describe 'Orginial data', ->
           throw err
         raw = JSON.parse data
         time = moment i[0] for i in raw
-        checkOrdered(time).should.be.exactly true
+        checkOrdered(time).should.equal true
         done()
         return
   describe 'time in stock.fmt', ->
@@ -29,6 +29,6 @@ describe 'Orginial data', ->
           throw err
         raw = JSON.parse data
         time = moment i[0] for i in raw
-        checkOrdered(time).should.be.exactly true
+        checkOrdered(time).should.equal true
         done()
         return

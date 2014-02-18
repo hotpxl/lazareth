@@ -23,6 +23,9 @@ if 'development' == app.get 'env'
 app.get '/', routes.index
 app.get '/api/:name', routes.api
 
-http.createServer(app).listen app.get('port'), ->
-  console.log 'Express server listening on port ' + app.get 'port'
-  return
+exports.run = ->
+  http.createServer(app).listen app.get('port'), ->
+    console.log 'Express server listening on port ' + app.get 'port'
+    return
+
+exports.run()
