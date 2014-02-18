@@ -1,4 +1,5 @@
 *.swp
+public/bower_components
 
 lib-cov
 *.seed
