@@ -88,4 +88,8 @@ predict = (data) ->
 exports.whatever = ->
   data = fs.readFileSync path.join(__dirname, '../data/stock.fmt'), 'ascii'
   raw = JSON.parse data
-  return predict raw
+  result = predict raw
+  ret = [['Time', 'Close', 'Return']]
+  for i in [0..raw.length - 1] by Math.floor(raw.length / 500)
+    ret.push [raw[i][0], raw[i][1], result[i]]
+  return ret

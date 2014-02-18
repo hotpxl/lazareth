@@ -27,7 +27,17 @@ function drawChart() {
   // Set chart options
   var options = {
     'title':'How Much Shit I Ate Last Night',
-    height: 500
+    height: 500,
+    series: {
+      1: {
+       targetAxisIndex: 1
+      }
+    },
+    vAxes: {
+      1: {
+        title: 'Return'
+      }
+    }
   };
 
   // Instantiate and draw our chart, passing in some options.
