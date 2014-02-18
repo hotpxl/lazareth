@@ -43,7 +43,8 @@
     "grunt-coffeelint": "*",
     "grunt-mocha-test": "*",
     "chai": "~1.9.0",
-    "selenium-webdriver": "~2.39.0"
+    "selenium-webdriver": "~2.39.0",
+    "chai-webdriver": "~0.5.2"
   },
   "bundledDependencies": [],
   "optionalDependencies": {},
