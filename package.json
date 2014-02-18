@@ -42,7 +42,8 @@
     "grunt-cli": "*",
     "grunt-coffeelint": "*",
     "grunt-mocha-test": "*",
-    "chai": "~1.9.0"
+    "chai": "~1.9.0",
+    "selenium-webdriver": "~2.39.0"
   },
   "bundledDependencies": [],
   "optionalDependencies": {},
