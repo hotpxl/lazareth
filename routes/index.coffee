@@ -1,5 +1,9 @@
 require 'coffee-script/register'
 process = require './process.coffee'
+_ = require 'underscore'
+
+combineIntoChartData = (title, data...) ->
+  ret = [title]
 
 exports.index = (req, res) ->
   res.render 'index.html'
