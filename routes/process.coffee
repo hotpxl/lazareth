@@ -88,6 +88,6 @@ exports.whatever = ->
   raw = JSON.parse data
   result = predict raw
   ret = [['Time', 'Close', 'Return']]
-  for i in [0..raw.length - 1] by Math.floor(raw.length / 500)
+  for i in [0..raw.length - 1] by Math.floor(raw.length / 30)
     ret.push [raw[i][0], raw[i][1], result[i]]
   return ret
