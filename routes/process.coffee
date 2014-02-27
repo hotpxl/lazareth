@@ -1,7 +1,30 @@
 fs = require 'fs'
 path = require 'path'
 moment = require 'moment'
+should = require('chai').should()
 _ = require 'underscore'
+
+# TODO pass between function a status object? Or calculate everyone's own status
+
+openPositionStrategyForSessionFactory = (rollback, cutoff) ->
+  extreme = do ->
+    max = undefined
+    min = undefined
+    (n) ->
+      ret = [max, min]
+      max = if max < n or max == undefined then n else max
+      min = if n < min or min == undefined then n else min
+      ret
+  rollbackQueue = new Array rollback
+  (price, timeIndex) ->
+    rollbackQueue.push price
+    [max, min] = extreme rollbackQueue.shift()
+    if cutoff < timeIndex
+      if max <= price
+        return 1
+      if price <= min
+        return -1
+    return 0
 
 class Transaction
 
@@ -23,6 +46,7 @@ class Transaction
       max: parseFloat data[0][1]
       min: parseFloat data[0][1]
     # Data here should be of one day
+    openPositionStrategy = openPositionStrategyForSessionFactory(@rollback, @cutoff)
     for i in [0..data.length - 1]
       now =
         trade: 0
@@ -35,6 +59,7 @@ class Transaction
         return: last.return
         max: last.max
         min: last.min
+      temp = openPositionStrategy now.price, i
       if @rollback < i # Set rollback maximum and minimum
         do =>
           t = parseFloat data[i - @rollback][1]
@@ -63,6 +88,7 @@ class Transaction
           now.trade = 1
         else if now.price <= last.min
           now.trade = -1
+        temp.should.equal now.trade
         if now.trade # Open a position
           now.position = now.trade
           now.extreme = now.price
@@ -88,6 +114,6 @@ exports.whatever = ->
   raw = JSON.parse data
   result = predict raw
   ret = [['Time', 'Close', 'Return']]
-  for i in [0..raw.length - 1] by Math.floor(raw.length / 30)
+  for i in [0..raw.length - 1] by Math.floor(raw.length / 400)
     ret.push [raw[i][0], raw[i][1], result[i]]
   return ret
