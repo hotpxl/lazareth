@@ -1,7 +1,7 @@
 fs = require 'fs'
 path = require 'path'
 moment = require 'moment'
-should = require('chai').should()
+# should = require('chai').should()
 _ = require 'underscore'
 
 # TODO pass between function a status object? Or calculate everyone's own status
@@ -21,10 +21,11 @@ openPositionStrategyForSessionFactory = (rollback, cutoff) ->
     [max, min] = extreme rollbackQueue.shift()
     if cutoff < timeIndex
       if max <= price
-        return 1
-      if price <= min
-        return -1
-    return 0
+        1
+      else if price <= min
+        -1
+    else
+      0
 
 class Transaction
 
@@ -43,8 +44,6 @@ class Transaction
       price: 0
       openPrice: 0
       return: ret
-      max: parseFloat data[0][1]
-      min: parseFloat data[0][1]
     # Data here should be of one day
     openPositionStrategy = openPositionStrategyForSessionFactory(@rollback, @cutoff)
     for i in [0..data.length - 1]
@@ -57,14 +56,7 @@ class Transaction
         price: parseFloat data[i][1]
         openPrice: last.openPrice
         return: last.return
-        max: last.max
-        min: last.min
-      temp = openPositionStrategy now.price, i
-      if @rollback < i # Set rollback maximum and minimum
-        do =>
-          t = parseFloat data[i - @rollback][1]
-          now.max = if last.max < t then t else last.max
-          now.min = if t < last.min then t else last.min
+      openPosition = openPositionStrategy now.price, i
       if last.position # SAR
         if i == data.length - 1 # Force cover at the end of day
           now.trade = -last.position
@@ -83,12 +75,8 @@ class Transaction
           (1 + last.return) *
           (1 - now.trade * (now.price / now.openPrice - 1)) - 1
           now.openPrice = 0
-      else if @cutoff < i # Consider opening a position
-        if last.max <= now.price
-          now.trade = 1
-        else if now.price <= last.min
-          now.trade = -1
-        temp.should.equal now.trade
+      else # Consider opening a position
+        now.trade = openPosition
         if now.trade # Open a position
           now.position = now.trade
           now.extreme = now.price
