@@ -1,7 +1,7 @@
+# should = require('chai').should()
 fs = require 'fs'
 path = require 'path'
 moment = require 'moment'
-# should = require('chai').should()
 _ = require 'underscore'
 
 # TODO pass between function a status object? Or calculate everyone's own status

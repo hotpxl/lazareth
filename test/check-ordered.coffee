@@ -12,7 +12,7 @@ checkOrdered = (list) ->
 describe 'Orginial data', ->
   describe 'time in cu-intraday.fmt', ->
     it 'should be sorted', (done) ->
-      fs.readFile path.join(__dirname, '../data/cu-intraday.fmt'),'ascii',
+      fs.readFile path.join(__dirname, '../data/cu-intraday.fmt'), 'ascii',
       (err, data) ->
         if err
           throw err
@@ -23,7 +23,7 @@ describe 'Orginial data', ->
         return
   describe 'time in stock.fmt', ->
     it 'should be sorted', (done) ->
-      fs.readFile path.join(__dirname, '../data/stock.fmt'),'ascii',
+      fs.readFile path.join(__dirname, '../data/stock.fmt'), 'ascii',
       (err, data) ->
         if err
           throw err
