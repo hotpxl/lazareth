@@ -23,7 +23,7 @@ if 'development' == app.get 'env'
 app.get '/', routes.index
 app.get '/api/:name', routes.api
 
-module.exports = do ->
+module.exports = do =>
   http.createServer(app).listen app.get('port'), ->
     console.log 'Express server listening on port ' + app.get 'port'
     return
