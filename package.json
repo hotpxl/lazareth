@@ -1,80 +1,63 @@
 {
-  "name":"lazareth",
-  "version":"0.0.1",
-  "description":"",
-  "keywords":[
-
-  ],
-  "homepage":"https://github.com/kevinleeone/lazareth",
-  "bugs":{
-    "url":"https://github.com/kevinleeone/lazareth/issues"
+  "name": "lazareth",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [],
+  "homepage": "https://github.com/kevinleeone/lazareth",
+  "bugs": {
+    "url": "https://github.com/kevinleeone/lazareth/issues"
   },
-  "license":"MIT",
-  "author":{
-    "name":"Yutian Li",
-    "email":"kevinleeone@gmail.com"
+  "license": "MIT",
+  "author": {
+    "name": "Yutian Li",
+    "email": "kevinleeone@gmail.com"
   },
-  "contributors":[
-
-  ],
-  "files":[
-
-  ],
-  "main":"app",
-  "bin":{
-
+  "contributors": [],
+  "files": [],
+  "main": "app",
+  "bin": {},
+  "man": [],
+  "directories": {},
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kevinleeone/lazareth.git"
   },
-  "man":[
-
-  ],
-  "directories":{
-
+  "scripts": {
+    "start": "supervisor -x coffee app.coffee",
+    "test": "grunt test"
   },
-  "repository":{
-    "type":"git",
-    "url":"git://github.com/kevinleeone/lazareth.git"
+  "config": {},
+  "dependencies": {
+    "bower": "*",
+    "coffee-script": "*",
+    "ejs": "*",
+    "express": "3.*",
+    "jade": "*",
+    "moment": "*",
+    "stylus": "*",
+    "supervisor": "*",
+    "underscore": "*"
   },
-  "scripts":{
-    "start":"supervisor -x coffee app.coffee",
-    "test":"grunt test"
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-cli": "*",
+    "grunt-coffeelint": "*",
+    "grunt-mocha-test": "*",
+    "chai": "*"
   },
-  "config":{
-
+  "bundledDependencies": [],
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*",
+    "npm": "*"
   },
-  "dependencies":{
-    "express":"*",
-    "coffee-script":"*",
-    "supervisor":"*",
-    "jade":"*",
-    "ejs":"*",
-    "bower":"*",
-    "moment":"*",
-    "underscore":"*"
-  },
-  "devDependencies":{
-    "grunt":"*",
-    "grunt-cli":"*",
-    "grunt-coffeelint":"*",
-    "grunt-mocha-test":"*",
-    "chai":"*"
-  },
-  "bundledDependencies":[
-
-  ],
-  "optionalDependencies":{
-
-  },
-  "engines":{
-    "node":"*",
-    "npm":"*"
-  },
-  "os":[
+  "os": [
     "darwin",
     "linux"
   ],
-  "cpu":[
+  "cpu": [
     "x64",
     "ia32"
   ],
-  "private":true
+  "private": true
 }
