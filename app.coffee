@@ -15,6 +15,9 @@ app.use express.json()
 app.use express.urlencoded()
 app.use express.methodOverride()
 app.use app.router
+app.use '/static', require('stylus').middleware(
+  src: path.join __dirname, 'public'
+)
 app.use '/static', express.static(path.join(__dirname, 'public'))
 
 if 'development' == app.get 'env'
