@@ -7,7 +7,7 @@ combineIntoChartData = (title, data...) ->
   ret.concat _.zip.apply(this, data)
 
 exports.index = (req, res) ->
-  res.render 'index.html'
+  res.render 'index.jade'
   return
 
 exports.api = (req, res) ->

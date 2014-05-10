@@ -1,0 +1,51 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title Homepage
+    link(href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet")
+    link(href="/static/stylesheets/dashboard.css" rel="stylesheet")
+    script(src="https://www.google.com/jsapi")
+    script(src="/static/bower_components/jquery/dist/jquery.min.js")
+    script(src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js")
+    script(src="/static/javascripts/client-process.js")
+  body
+    .navbar.navbar-default.navbar-fixed-top(role="navigation")
+      .container-fluid
+        .navbar-header
+          button.navbar-toggle(type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1")
+            span.sr-only Toggle navigation
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a.navbar-brand(href="#") Lose your money
+        .collapse.navbar-collapse#bs-example-navbar-collapse-1
+          ul.nav.navbar-nav.navbar-left
+            li
+              a(href="#") Homepage
+            li
+              a(href="#") About
+    .container-fluid
+      .row
+        .col-sm-3.col-md-2.sidebar
+          ul.nav.nav-sidebar
+            li.active
+              a(href="#") Overview
+            li
+              a(href="#") Analysis
+            li
+              a(href="#") Export
+        .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+          h1.page-header Overview
+          .row
+            form(action="/" method="GET")
+              .col-lg-2
+                input.form-control(type="text" name="param1" placeholder="Parameter 1")
+              .col-lg-2
+                input.form-control(type="text" name="param2" placeholder="Parameter 2")
+              .col-lg-2
+                input.form-control(type="text" name="param3" placeholder="Parameter 3")
+              button.btn.btn-default(type="submit") Go!
+          #chart_div
