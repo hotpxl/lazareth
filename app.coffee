@@ -24,6 +24,7 @@ if 'development' == app.get 'env'
   app.use express.errorHandler()
 
 app.get '/', routes.index
+app.post '/api', routes.api
 app.get '/api/:name', routes.api
 
 module.exports = do =>
