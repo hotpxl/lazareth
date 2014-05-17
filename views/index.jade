@@ -1,5 +1,5 @@
 doctype html
-html(lang="en")
+html(lang="cn")
   head
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
@@ -7,10 +7,9 @@ html(lang="en")
     title Homepage
     link(href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet")
     link(href="/static/stylesheets/dashboard.css" rel="stylesheet")
-    // script(src="https://www.google.com/jsapi")
+    script(src="https://www.google.com/jsapi")
     script(src="/static/bower_components/jquery/dist/jquery.min.js")
     script(src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js")
-    script(defer src="/static/javascripts/client-process.js")
   body
     .navbar.navbar-default.navbar-fixed-top(role="navigation")
       .container-fluid
@@ -39,28 +38,47 @@ html(lang="en")
               a(href="#") Export
         .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
           h1.page-header 定制策略
+          .alert.alert-danger#alert(style="display:none")
           h2 交易标的
           .form-horizontal
             .form-group
-              label.col-sm-2.control-label(for="trade_target") 标的选择
+              label.col-sm-2.control-label(for="trade-target") 标的选择
               .col-sm-4
-                select.form-control#trade_target
+                select.form-control#trade-target
                   option 股指期货
           h2 开仓策略
           .form-horizontal
             .form-group
-              label.col-sm-2.control-label(for="open_strategy") 策略选择
+              label.col-sm-2.control-label(for="open-strategy") 策略选择
               .col-sm-4
-                select.form-control#open_strategy
-                  option 最大最小开仓
+                select.form-control#open-strategy
+                  option 最大最小法
             .form-group
               label.col-sm-2.control-label(for="rollback") 向前递延周期数
               .col-sm-4
                 input.form-control(type="number" id="rollback" placeholder="向前递延周期数")
             .form-group
-              label.col-sm-2.control-label(for="cutoff") 阶段周期数
+              label.col-sm-2.control-label(for="cutoff") 截断周期数
               .col-sm-4
-                input.form-control(type="number" id="cutoff" placeholder="阶段周期数")
-          h2
-          button.btn.btn-default#getStrategyResult Go!
-          #chart_div
+                input.form-control(type="number" id="cutoff" placeholder="截断周期数")
+          h2 平仓策略
+          .form-horizontal
+            .form-group
+              label.col-sm-2.control-label(for="close-strategy") 策略选择
+              .col-sm-4
+                select.form-control#close-strategy
+                  option SAR头寸跟踪法
+            .form-group
+              label.col-sm-2.control-label(for="step-size") 步长
+              .col-sm-4
+                input.form-control(type="number" id="step-size" placeholder="步长")
+            .form-group
+              label.col-sm-2.control-label(for="max-af") 最大加速因子
+              .col-sm-4
+                input.form-control(type="number" id="max-af" placeholder="最大加速因子")
+          hr
+          .row
+            button.btn.btn-default.col-sm-12#get-strategy-result 开始模拟
+          h1.page-header 模拟结果
+          #chart-div
+    script(src="/static/javascripts/client-process.js")

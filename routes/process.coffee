@@ -50,8 +50,12 @@ closePositionStrategyForSessionFactory = (maxAF, stepSize, pos, price) ->
 
 class Transaction
 
-  constructor: (@rollback, @cutoff, @maxAF, @stepSize) ->
-    if @cutoff < @rollback
+  constructor: (rollback, cutoff, maxAF, stepSize) ->
+    @rollback = parseInt rollback
+    @cutoff = parseInt cutoff
+    @maxAF = parseFloat maxAF
+    @stepSize = parseFloat stepSize
+    if isNaN(@rollback) or isNaN(@cutoff) or isNaN(@maxAF) or isNaN(@stepSize) or @cutoff < @rollback
       throw new Error 'Rollback larger than cutoff'
 
   processDay: (data, ret) ->
@@ -119,10 +123,11 @@ maxDrawback = (data) ->
 #   mean = sum / data.length
 #   console.log mean
 
-predict = (data) ->
+predict = (data, param) ->
   a = _.groupBy data, (i) ->
     i[0][..9]
-  transaction = new Transaction 4, 8, 0.1, 0.01
+  # transaction = new Transaction 4, 8, 0.1, 0.01
+  transaction = new Transaction(param.rollback, param.cutoff, param.maxAF, param.stepSize)
   currentReturn = 1
   retList = []
   for i, j of a
@@ -130,12 +135,15 @@ predict = (data) ->
     currentReturn = retList[retList.length - 1]
   return retList
 
-exports.whatever = ->
+exports.run = (param) ->
   data = fs.readFileSync path.join(__dirname, '../data/stock.fmt'), 'ascii'
   raw = JSON.parse data
-  result = predict raw
+  try
+    result = predict raw, param
+  catch err
+    return status: -1, err: 'Invalid parameter'
   ret = []
   for i in [0..raw.length - 1] by Math.floor(raw.length / 400)
     ret.push [raw[i][0], raw[i][1], result[i]]
   ret.unshift ['Time', 'Close', 'Return']
-  return ret
+  return status: 0, plot: ret
