@@ -7,10 +7,10 @@ html(lang="en")
     title Homepage
     link(href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet")
     link(href="/static/stylesheets/dashboard.css" rel="stylesheet")
-    script(src="https://www.google.com/jsapi")
+    // script(src="https://www.google.com/jsapi")
     script(src="/static/bower_components/jquery/dist/jquery.min.js")
     script(src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js")
-    script(src="/static/javascripts/client-process.js")
+    script(defer src="/static/javascripts/client-process.js")
   body
     .navbar.navbar-default.navbar-fixed-top(role="navigation")
       .container-fluid
@@ -38,14 +38,29 @@ html(lang="en")
             li
               a(href="#") Export
         .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
-          h1.page-header Overview
-          .row
-            form(action="/" method="GET")
-              .col-lg-2
-                input.form-control(type="text" name="param1" placeholder="Parameter 1")
-              .col-lg-2
-                input.form-control(type="text" name="param2" placeholder="Parameter 2")
-              .col-lg-2
-                input.form-control(type="text" name="param3" placeholder="Parameter 3")
-              button.btn.btn-default(type="submit") Go!
+          h1.page-header 定制策略
+          h2 交易标的
+          .form-horizontal
+            .form-group
+              label.col-sm-2.control-label(for="trade_target") 标的选择
+              .col-sm-4
+                select.form-control#trade_target
+                  option 股指期货
+          h2 开仓策略
+          .form-horizontal
+            .form-group
+              label.col-sm-2.control-label(for="open_strategy") 策略选择
+              .col-sm-4
+                select.form-control#open_strategy
+                  option 最大最小开仓
+            .form-group
+              label.col-sm-2.control-label(for="rollback") 向前递延周期数
+              .col-sm-4
+                input.form-control(type="number" id="rollback" placeholder="向前递延周期数")
+            .form-group
+              label.col-sm-2.control-label(for="cutoff") 阶段周期数
+              .col-sm-4
+                input.form-control(type="number" id="cutoff" placeholder="阶段周期数")
+          h2
+          button.btn.btn-default#getStrategyResult Go!
           #chart_div
