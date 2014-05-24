@@ -10,7 +10,7 @@ html(lang="cn")
     script(src="https://www.google.com/jsapi")
     script(src="/static/bower_components/jquery/dist/jquery.min.js")
     script(src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js")
-  body
+  body(data-spy="scroll" data-target=".nav-spy")
     .navbar.navbar-default.navbar-fixed-top(role="navigation")
       .container-fluid
         .navbar-header
@@ -28,25 +28,37 @@ html(lang="cn")
               a(href="#") About
     .container-fluid
       .row
-        .col-sm-3.col-md-2.sidebar
+        .col-sm-3.col-md-2.sidebar.nav-spy
           ul.nav.nav-sidebar
-            li.active
-              a(href="#") Overview
             li
-              a(href="#") Analysis
+              a(href="#trade-target-anchor") 交易标的
+              ul.nav.nav-sidebar
+                li
+                  a(href="#trade-target-desc-1-anchor") Desc 1
+                li
+                  a(href="#trade-target-desc-2-anchor") Desc 2
             li
-              a(href="#") Export
+              a(href="#open-strategy-anchor") 开仓策略
+            li
+              a(href="#close-strategy-anchor") 平仓策略
+          a(href="#") Back to top
         .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
           h1.page-header 定制策略
           .alert.alert-danger#alert(style="display:none")
           h2 交易标的
+          .anchor#trade-target-anchor
           .form-horizontal
             .form-group
               label.col-sm-2.control-label(for="trade-target") 标的选择
               .col-sm-4
                 select.form-control#trade-target
                   option 股指期货
+          .anchor#trade-target-desc-1-anchor
+          div(style="height: 500px;") asdf
+          .anchor#trade-target-desc-2-anchor
+          div(style="height: 300px;") Lorem
           h2 开仓策略
+          .anchor#open-strategy-anchor
           .form-horizontal
             .form-group
               label.col-sm-2.control-label(for="open-strategy") 策略选择
@@ -61,7 +73,9 @@ html(lang="cn")
               label.col-sm-2.control-label(for="cutoff") 截断周期数
               .col-sm-4
                 input.form-control(type="number" id="cutoff" placeholder="截断周期数")
+          div(style="height: 500px;")
           h2 平仓策略
+          .anchor#close-strategy-anchor
           .form-horizontal
             .form-group
               label.col-sm-2.control-label(for="close-strategy") 策略选择
@@ -76,6 +90,7 @@ html(lang="cn")
               label.col-sm-2.control-label(for="max-af") 最大加速因子
               .col-sm-4
                 input.form-control(type="number" id="max-af" placeholder="最大加速因子")
+          div(style="height: 500px;")
           hr
           .row
             button.btn.btn-default.col-sm-12#get-strategy-result 开始模拟
