@@ -37,6 +37,12 @@ html(lang="cn")
             li
               a(href="#close-strategy-anchor") Closing
             li
+              a(href="#stop-loss-strategy-anchor") Stop Loss Strategy
+            li
+              a(href="#position-control-anchor") Position Control
+            li
+              a(href="#transaction-fee-anchor") Transaction Fee
+            li
               a(href="#results-anchor") Results
               ul.nav.nav-sidebar
                 li
@@ -51,7 +57,7 @@ html(lang="cn")
           .anchor#trade-target-anchor
           .form-horizontal
             .form-group
-              label.col-sm-2.control-label(for="trade-target") Select Target
+              label.col-sm-2.control-label(for="trade-target") Select Trading Target
               .col-sm-4
                 select.form-control#trade-target
                   option CSI 300 Futures
@@ -82,11 +88,34 @@ html(lang="cn")
             .form-group
               label.col-sm-2.control-label(for="step-size") Stepsize
               .col-sm-4
-                input.form-control(type="number" id="step-size" placeholder="Stepsize")
+                input.form-control#step-size(type="number" placeholder="Stepsize")
             .form-group
               label.col-sm-2.control-label(for="max-af") Maximum Acceleration Factor
               .col-sm-4
-                input.form-control(type="number" id="max-af" placeholder="Maximum Acceleration Factor")
+                input.form-control#max-af(type="number" placeholder="Maximum Acceleration Factor")
+          h2 Stop Loss Strategy
+          .anchor#stop-loss-strategy-anchor
+          .form-horizontal
+            .form-group
+              label.col-sm-2.control-label(for="stop-loss-strategy") Select Stop Loss Strategy
+              .col-sm-4
+                select.form-control#stop-loss-strategy
+                  option SAR Position Tracking
+          h2 Position Control
+          .anchor#position-control-anchor
+          .form-horizontal
+            .form-group
+              label.col-sm-2.control-label(for="position-control") Select Position Control
+              .col-sm-4
+                select.form-control#position-control
+                  option 0-1 Position
+          h2 Transaction Fee
+          .anchor#transaction-fee-anchor
+          .form-horizontal
+            .form-group
+              label.col-sm-2.control-label(for="transaction-fee") Transaction Fee
+              .col-sm-4
+                input.form-control#transaction-fee(type="number" placeholder="Transaction Fee")
           hr
           .row
             button.btn.btn-default.col-sm-12#get-strategy-result Start Simulating
