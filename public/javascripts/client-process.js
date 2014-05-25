@@ -71,7 +71,7 @@ $('#get-strategy-result').click(function() {
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.LineChart(document.getElementById('chart-div'));
         chart.draw(d, options);
-        $('#max-drawback').html(data.ret.maxRetreat);
+        $('#max-drawback').html(data.ret.maxDrawback)
       })();
     }
   });
