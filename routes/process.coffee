@@ -50,11 +50,12 @@ closePositionStrategyForSessionFactory = (maxAF, stepSize, pos, price) ->
 
 class Transaction
 
-  constructor: (rollback, cutoff, maxAF, stepSize) ->
+  constructor: (rollback, cutoff, maxAF, stepSize, transactionFee) ->
     @rollback = parseInt rollback
     @cutoff = parseInt cutoff
     @maxAF = parseFloat maxAF
     @stepSize = parseFloat stepSize
+    @transactionFee = parseFloat transactionFee
     if isNaN(@rollback) or isNaN(@cutoff) or isNaN(@maxAF) or isNaN(@stepSize) or @cutoff < @rollback
       throw new Error 'Rollback larger than cutoff'
 
@@ -85,7 +86,7 @@ class Transaction
           now.position = last.position + now.trade
           now.return =
           last.return *
-          (1 - now.trade * (now.price / now.openPrice - 1))
+          (1 - now.trade * (now.price / now.openPrice - 1) * (1 - @transactionFee))
           now.openPrice = 0
       else # Consider opening a position
         now.trade = openPosition
@@ -127,7 +128,7 @@ predict = (data, param) ->
   a = _.groupBy data, (i) ->
     i[0][..9]
   # transaction = new Transaction 4, 8, 0.1, 0.01
-  transaction = new Transaction(param.rollback, param.cutoff, param.maxAF, param.stepSize)
+  transaction = new Transaction(param.rollback, param.cutoff, param.maxAF, param.stepSize, param.transactionFee)
   currentReturn = 1
   retList = []
   for i, j of a

@@ -43,7 +43,8 @@ $('#get-strategy-result').click(function() {
     'rollback': $('#rollback').val(),
     'cutoff': $('#cutoff').val(),
     'stepSize': $('#step-size').val(),
-    'maxAF': $('#max-af').val()
+    'maxAF': $('#max-af').val(),
+    'transactionFee': $('#transaction-fee').val()
   }, function(data) {
     if (data.ret.status === -1) {
       $('#alert').html(data.ret.err);
