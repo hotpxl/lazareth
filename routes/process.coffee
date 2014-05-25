@@ -124,6 +124,10 @@ maxDrawback = (data) ->
 #   mean = sum / data.length
 #   console.log mean
 
+amortizedReturn = (raw, result) ->
+  duration = moment(raw[raw.length - 1][0]).diff moment(raw[0][0]), 'years', true
+  Math.log(result[result.length - 1]) / duration
+
 predict = (data, param) ->
   a = _.groupBy data, (i) ->
     i[0][..9]
@@ -148,4 +152,5 @@ exports.run = (param) ->
     ret.push [raw[i][0], raw[i][1], result[i]]
   ret.unshift ['Time', 'Close', 'Return']
   drawback = maxDrawback result
-  return status: 0, plot: ret, maxDrawback: drawback
+  amortized = amortizedReturn raw, result
+  return status: 0, plot: ret, maxDrawback: drawback, amortizedReturn: amortized
