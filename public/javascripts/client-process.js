@@ -55,7 +55,7 @@ $('#get-strategy-result').click(function() {
         var d = google.visualization.arrayToDataTable(data.ret.plot);
         // Set chart options
         var options = {
-          'title':'How Much Shit I Ate Last Night',
+          'title':'Trend chart',
           height: 500,
           series: {
             1: {
