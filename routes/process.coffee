@@ -146,4 +146,5 @@ exports.run = (param) ->
   for i in [0..raw.length - 1] by Math.floor(raw.length / 400)
     ret.push [raw[i][0], raw[i][1], result[i]]
   ret.unshift ['Time', 'Close', 'Return']
-  return status: 0, plot: ret
+  drawback = maxDrawback result
+  return status: 0, plot: ret, maxDrawback: drawback
