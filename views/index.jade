@@ -36,6 +36,13 @@ html(lang="cn")
               a(href="#open-strategy-anchor") Opening
             li
               a(href="#close-strategy-anchor") Closing
+            li
+              a(href="#results-anchor") Results
+              ul.nav.nav-sidebar
+                li
+                  a(href="#chart-anchor") Chart
+                li
+                  a(href="#indicators-anchor") Indicators
           a(href="#") Back to top
         .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
           h1.page-header Customize Strategy
@@ -84,9 +91,12 @@ html(lang="cn")
           .row
             button.btn.btn-default.col-sm-12#get-strategy-result Start Simulating
           h1.page-header Results
-          h2 Graph
+          .anchor#results-anchor
+          h2 Chart
+          .anchor#chart-anchor
           #chart-div
           h2 Indicators
+          .anchor#indicators-anchor
           .row
             .col-xs-8#indicators
               table.table.table-bordered
