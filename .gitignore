@@ -1,5 +1,6 @@
 *.swp
 public/bower_components
+public/stylesheets/*.css
 
 lib-cov
 *.seed
