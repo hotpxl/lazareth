@@ -73,7 +73,7 @@ $('#get-strategy-result').click(function() {
         var chart = new google.visualization.LineChart(document.getElementById('chart-div'));
         chart.draw(d, options);
         $('#max-drawback').html(data.ret.maxDrawback);
-        $('#amortized-return').html(data.ret.amortizedReturn);
+        $('#annual-return').html(data.ret.amortizedReturn);
       })();
     }
   });
