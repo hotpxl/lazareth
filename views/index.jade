@@ -4,14 +4,14 @@ html(lang="cn")
     meta(charset="utf-8")
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
     meta(name="viewport" content="width=device-width, initial-scale=1")
-    title ezHFTChina
+    title 炒炒
     link(href="/static/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet")
     link(href="/static/stylesheets/dashboard.css" rel="stylesheet")
     script(src="https://www.google.com/jsapi")
     script(src="/static/bower_components/jquery/dist/jquery.min.js")
     script(src="/static/bower_components/bootstrap/dist/js/bootstrap.min.js")
   body(data-spy="scroll" data-target=".nav-spy")
-    .navbar.navbar-default.navbar-fixed-top(role="navigation")
+    .navbar.navbar-inverse.navbar-fixed-top(role="navigation")
       .container-fluid
         .navbar-header
           button.navbar-toggle(type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1")
@@ -19,7 +19,7 @@ html(lang="cn")
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand(href="#") ezHFTChina
+          a.navbar-brand(href="#") 炒炒
         .collapse.navbar-collapse#bs-example-navbar-collapse-1
           ul.nav.navbar-nav.navbar-left
             li
@@ -77,11 +77,11 @@ html(lang="cn")
             .form-group
               label.col-sm-2.control-label(for="rollback") Monitoring Cycles
               .col-sm-4
-                input.form-control(type="number" id="rollback" placeholder="Monitoring Cycles")
+                input.form-control(type="number" id="rollback" placeholder="Monitoring Cycles" value="4")
             .form-group
               label.col-sm-2.control-label(for="cutoff") Cutting Cycles
               .col-sm-4
-                input.form-control(type="number" id="cutoff" placeholder="Cutting Cycles")
+                input.form-control(type="number" id="cutoff" placeholder="Cutting Cycles" value="8")
           h2 Closing
           .anchor#close-strategy-anchor
           .form-horizontal
@@ -93,11 +93,11 @@ html(lang="cn")
             .form-group
               label.col-sm-2.control-label(for="step-size") Stepsize
               .col-sm-4
-                input.form-control#step-size(type="number" placeholder="Stepsize")
+                input.form-control#step-size(type="number" placeholder="Stepsize" value="0.01")
             .form-group
               label.col-sm-2.control-label(for="max-af") Maximum Acceleration Factor
               .col-sm-4
-                input.form-control#max-af(type="number" placeholder="Maximum Acceleration Factor")
+                input.form-control#max-af(type="number" placeholder="Maximum Acceleration Factor" value="0.1")
           h2 Stop Loss Strategy
           .anchor#stop-loss-strategy-anchor
           .form-horizontal
@@ -120,10 +120,10 @@ html(lang="cn")
             .form-group
               label.col-sm-2.control-label(for="transaction-fee") Transaction Fee
               .col-sm-4
-                input.form-control#transaction-fee(type="number" placeholder="Transaction Fee")
+                input.form-control#transaction-fee(type="number" placeholder="Transaction Fee" value="0.0003")
           hr
           .row
-            button.btn.btn-default.col-sm-12#get-strategy-result Start Simulating
+            button.btn.btn-lg.btn-primary.col-xs-8#get-strategy-result Start Simulating
           h1.page-header Results
           .anchor#results-anchor
           h2 Chart
