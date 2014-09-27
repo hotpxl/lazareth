@@ -5,7 +5,7 @@ path = require 'path'
 
 app = express()
 
-app.set 'port', process.env.PORT || 8000
+app.set 'port', process.env.PORT or 8000
 app.set 'views', path.join(__dirname, 'views')
 app.set 'view engine', 'jade'
 app.engine 'html', require('ejs').renderFile
@@ -20,14 +20,14 @@ app.use '/static', require('stylus').middleware(
 )
 app.use '/static', express.static(path.join(__dirname, 'public'))
 
-if 'development' == app.get 'env'
+if 'development' is app.get 'env'
   app.use express.errorHandler()
 
 app.get '/', routes.index
 app.post '/api', routes.api
 app.get '/api/:name', routes.api
 
-module.exports = do =>
+module.exports = do ->
   http.createServer(app).listen app.get('port'), ->
     console.log 'Express server listening on port ' + app.get 'port'
     return

@@ -9,7 +9,7 @@ fs.readFile 'stock.csv', 'ascii', (err, data) ->
     for i in raw
       do ->
         [date, time, close] = i.split(',')[0..2]
-        if time.length == 5
+        if time.length is 5
           time = '0' + time
         [
           do ->
@@ -17,7 +17,7 @@ fs.readFile 'stock.csv', 'ascii', (err, data) ->
               m.toISOString()
             else
               console.log "#{date}-#{time}"
-              throw new EvalError 'Time illegal',
+              throw new EvalError('Time illegal')
           parseFloat close
         ]
   ), (err) ->

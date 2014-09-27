@@ -1,7 +1,7 @@
 module.exports = (grunt) ->
   grunt.initConfig
     coffeelint:
-      test:
+      app:
         src: [
           '*.coffee',
           'routes/**/*.coffee',
@@ -10,22 +10,37 @@ module.exports = (grunt) ->
         ]
         options:
           arrow_spacing:
-            level: 'warn'
+            level: 'error'
+          empty_constructor_needs_parens:
+            level: 'error'
           line_endings:
-            level: 'warn'
+            level: 'error'
           max_line_length:
             level: 'warn'
+          no_empty_functions:
+            level: 'error'
           no_empty_param_list:
-            level: 'warn'
+            level: 'error'
+          no_unnecessary_double_quotes:
+            level: 'error'
+          no_unnecessary_fat_arrows:
+            level: 'error'
+          prefer_english_operator:
+            level: 'error'
+          non_empty_constructor_needs_parens:
+            level: 'error'
+          space_operators:
+            level: 'error'
     mochaTest:
-      test:
+      app:
         src: ['test/**/*.coffee']
         options:
           reporter: 'spec'
           require: 'coffee-script/register'
+          timeout: 60000
 
   grunt.loadNpmTasks 'grunt-coffeelint'
   grunt.loadNpmTasks 'grunt-mocha-test'
 
-  grunt.registerTask 'test', ['coffeelint', 'mochaTest']
+  grunt.registerTask 'default', ['coffeelint', 'mochaTest']
 

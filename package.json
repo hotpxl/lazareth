@@ -1,63 +1,26 @@
 {
   "name": "lazareth",
-  "version": "0.0.1",
-  "description": "",
-  "keywords": [],
-  "homepage": "https://github.com/kevinleeone/lazareth",
-  "bugs": {
-    "url": "https://github.com/kevinleeone/lazareth/issues"
-  },
-  "license": "MIT",
-  "author": {
-    "name": "Yutian Li",
-    "email": "kevinleeone@gmail.com"
-  },
-  "contributors": [],
-  "files": [],
-  "main": "app",
-  "bin": {},
-  "man": [],
-  "directories": {},
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/kevinleeone/lazareth.git"
-  },
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "start": "supervisor -x coffee app.coffee",
-    "test": "grunt test"
+    "start": "node ./bin/www"
   },
-  "config": {},
   "dependencies": {
-    "bower": "*",
-    "coffee-script": "*",
-    "ejs": "*",
-    "express": "3.*",
+    "express": "*",
+    "body-parser": "*",
+    "cookie-parser": "*",
+    "morgan": "*",
+    "serve-favicon": "*",
+    "debug": "*",
     "jade": "*",
     "moment": "*",
-    "stylus": "*",
-    "supervisor": "*",
     "underscore": "*"
   },
   "devDependencies": {
     "grunt": "*",
-    "grunt-cli": "*",
     "grunt-coffeelint": "*",
+    "mocha": "*",
     "grunt-mocha-test": "*",
     "chai": "*"
-  },
-  "bundledDependencies": [],
-  "optionalDependencies": {},
-  "engines": {
-    "node": "*",
-    "npm": "*"
-  },
-  "os": [
-    "darwin",
-    "linux"
-  ],
-  "cpu": [
-    "x64",
-    "ia32"
-  ],
-  "private": true
+  }
 }
