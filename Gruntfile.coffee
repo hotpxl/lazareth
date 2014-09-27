@@ -11,6 +11,11 @@ module.exports = (grunt) ->
         options:
           arrow_spacing:
             level: 'error'
+          colon_assignment_spacing:
+            level: 'error'
+            spacing:
+              left: 0
+              right: 1
           empty_constructor_needs_parens:
             level: 'error'
           line_endings:
