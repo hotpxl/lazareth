@@ -9,8 +9,8 @@ openPositionStrategyForSessionFactory = (rollback, cutoff) ->
     min = undefined
     (n) ->
       ret = [max, min]
-      max = if max < n or max == undefined then n else max
-      min = if n < min or min == undefined then n else min
+      max = if max < n or max is undefined then n else max
+      min = if n < min or min is undefined then n else min
       ret
   rollbackQueue = new Array(rollback)
   (price, timeIndex) ->
@@ -37,7 +37,7 @@ closePositionStrategyForSessionFactory = (maxAF, stepSize, pos, price) ->
       then price else last.extreme
       af: 0
       sar: 0
-    now.af = do =>
+    now.af = do ->
       t = last.af + (now.extreme isnt last.extreme) * stepSize
       if t < maxAF then t else maxAF
     now.sar = last.sar + (now.extreme - last.sar) * now.af
@@ -57,7 +57,7 @@ class Transaction
     @stepSize = parseFloat stepSize
     @transactionFee = parseFloat transactionFee
     if isNaN(@rollback) or isNaN(@cutoff) or isNaN(@maxAF) or isNaN(@stepSize) or @cutoff < @rollback
-      throw new Error 'Rollback larger than cutoff'
+      throw new Error('Rollback larger than cutoff')
 
   processDay: (data, ret) ->
     retList = []
@@ -78,7 +78,7 @@ class Transaction
         return: last.return
       openPosition = openPositionStrategy now.price, i
       if last.position # SAR
-        if i == data.length - 1 # Force cover at the end of day
+        if i is data.length - 1 # Force cover at the end of day
           now.trade = -last.position
         else
           now.trade = closePositionStrategy now.price

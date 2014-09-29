@@ -12,7 +12,7 @@ fs.readFile 'CU.intraday.csv', 'ascii', (err, data) ->
         [
           if (m = moment(time, 'YYYYMMDD-HH-mm-ss-SSS')).isValid()
           then m.toISOString()
-          else throw new EvalError 'Time illegal',
+          else throw new EvalError('Time illegal')
           parseInt close
         ]
   ), (err) ->
