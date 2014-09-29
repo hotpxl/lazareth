@@ -1,6 +1,16 @@
-extends layout
-
-block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+doctype html
+html
+  head
+    title= title
+    style.
+      body {
+        padding: 50px;
+        font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+      }
+      a {
+        color: #00B7FF;
+      }
+  body
+    h1= message
+    h2= error.status
+    pre #{error.stack}

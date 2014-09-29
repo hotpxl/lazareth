@@ -3,6 +3,7 @@ module.exports = (grunt) ->
     coffeelint:
       app:
         src: [
+          'bin/**/*.coffee',
           '*.coffee',
           'routes/**/*.coffee',
           'test/**/*.coffee',

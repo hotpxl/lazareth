@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "DEBUG=*,-stylus:lexer supervisor -x coffee ./bin/www.coffee"
   },
   "dependencies": {
     "express": "*",
@@ -14,7 +14,10 @@
     "debug": "*",
     "jade": "*",
     "moment": "*",
-    "underscore": "*"
+    "underscore": "*",
+    "coffee-script": "*",
+    "supervisor": "*",
+    "stylus": "*"
   },
   "devDependencies": {
     "grunt": "*",
